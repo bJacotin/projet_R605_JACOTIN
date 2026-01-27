@@ -16,14 +16,15 @@
   },
   "dependencies": {
     "@hapi/boom": "9.x.x",
-    "@hapipal/haute-couture": "4.x.x",
+    "@hapipal/haute-couture": "^4.3.1",
     "@hapipal/schmervice": "^3.0.0",
     "@hapipal/schwifty": "6.x.x",
     "exiting": "6.0.1",
-    "joi": "17.x.x",
+    "joi": "^17.13.3",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
     "objection": "2.x.x",
+    "schmervice": "^1.6.0",
     "sqlite3": "5.0.2"
   },
   "peerDependencies": {
