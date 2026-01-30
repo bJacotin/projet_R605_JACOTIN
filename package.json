@@ -24,6 +24,7 @@
     "joi": "^17.13.3",
     "mysql": "^2.18.1",
     "mysql2": "^2.3.3",
+    "nodemailer": "^7.0.13",
     "objection": "2.x.x",
     "schmervice": "^1.6.0",
     "sqlite3": "5.0.2"
