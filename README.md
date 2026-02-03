@@ -1,72 +1,62 @@
-Projet R6.05 - Developpement avance
-Ce projet est une application de gestion d'utilisateurs et de films realisee dans le cadre de l'IUT. Elle permet de gerer un catalogue de films et des comptes utilisateurs avec une gestion de droits specifiques.
+Projet R6.05 - Développement avancé.
 
-Configuration du projet
-1. Variables d'environnement
-Creez un fichier .env a la racine du dossier iut-project avec les parametres suivants :
+Bienvenue dans le README de ce projet où vous trouverez toutes les informations nécessaires quant à la bonne utilisation de cette application de gestion d'utilisateurs et de films.
 
-Extrait de code
-PORT=3000
-NODE_ENV=development
+PRÉSENTATION DU PROJET : 
+Bienvenue dans le projet relatif à l'IUT concernant la création d'une application de création d'utilisateurs ainsi que de films !
+Un utilisateur est créé à partir de : 
+  -son nom,
+  -prénom,
+  -email,
+  -mot de passe,
+  -pseudonyme,
+  -scope.
 
-DB_HOST=0.0.0.0
-DB_USER=root
-DB_PASSWORD=hapi
-DB_DATABASE=user
-DB_PORT=3307
-Note technique : Pour assurer le bon chargement de la configuration, la ligne suivante a ete initialisee au debut du fichier manifest.js : Dotenv.config({ path: require('path').join(__dirname, '..', '.env') });
+Avant toutes choses, voici les variables d'environnement à inscrire dans le .env afin d'accéder la Base De Données, hébergée personnellement sur DOCKER via mysql2 : 
+  PORT=3000
+  NODE_ENV=development
+  
+  DB_HOST=0.0.0.0
+  DB_USER=root
+  DB_PASSWORD=hapi
+  DB_DATABASE=user
+  DB_PORT=3307
 
-2. Lancement de l'application
-Positionnez-vous dans le dossier iut-project et executez la commande suivante :
+Ayant eu un problème avec mon "manifest.js", voici la ligne à initialiser en début du fichier : 
+  Dotenv.config({ path: require('path').join(__dirname, '..', '.env') });
 
-Bash
-npm start
-Documentation de l'API
-Une fois le serveur lance, la documentation Swagger est accessible a l'adresse suivante : http://localhost:3000/documentation
+Il faut commencer, en étant dans le dossier "iut-project" d'entrer la commande : 
+  npm start
 
-Authentification
-Pour acceder aux routes protegees, vous devez utiliser un jeton (token) administrateur.
+Ensuite, rendez-vous à l'adresse suivante :
+  http://localhost:3000/documentation
 
-Connectez-vous avec le compte de test :
+Vous arriverez sur une fênêtre où les différentes fonctionnalités sont présentes.
 
-Email : a.a@gmail.com
+Commençons par la partie la plus importe qui nous permettra d'utiliser tout le reste, la partie UTILISATEURS.
 
-Mot de passe : azertyuiop
+UTILISATEURS : 
+Nous avons plusieurs routes : 
+  -POST /user : permet de créer un utilisateur avec le scope "user" par défaut,
+  -PATCH /user/{id} : permet de modifier un utilisateur à partir de son ID    /!\ IL EST NÉCESSAIRE D'ÊTRE ADMIN POUR MODIFIER /!\
+  -DELETE /user/{id} : permet de supprimer un utilisateur à partir de son ID   /!\ IL EST NÉCESSAIRE D'ÊTRE ADMIN POUR MODIFIER /!\
+  -POST /user/login : permet de s'authentifier via l'email et le mot de passe d'un utilisateur créé à partir de la première route.
 
-Recuperez le token via la route POST /user/login.
+Pour tester l'ensemble des services, nous pouvons nous connecter avec l'utilisateur de TEST administrateur : 
+  -email : a.a@gmail.com
+  -pwd : azertyuiop
 
-Cliquez sur le bouton Authorize dans Swagger.
+Pour se connecter ensuite en administrateur sur l'ensemble de l'application, il faut récupérer le token de l'utilisateur admin disponible une fois la route /user/login effectuée ! 
+Une fois récupéré, il suffit de cliquer sur le bouton Authorize et de marquer : [ Bearer "token" ]
 
-Saisissez la valeur sous la forme : Bearer VOTRE_TOKEN.
+Enfin, pour cloturer la partie utilisateur, nous avons une dernière route : 
+  -GET /users : permet de lister l'ENSEMBLE des utilisateurs avec TOUTES leurs informations    /!\ IL EST NÉCESSAIRE D'ÊTRE ADMIN POUR LISTER /!\
 
-Liste des services disponibles
-Gestion des Utilisateurs
-POST /user : Creation d'un utilisateur (scope "user" par defaut).
+FILMS : 
+Nous avons plusieurs routes : 
+  -POST /movie : permet de créer un film /!\ IL EST NÉCESSAIRE D'ÊTRE ADMIN POUR MODIFIER /!\
+  -PATCH /movie/{id} : permet de modifier un film à partir de son ID    /!\ IL EST NÉCESSAIRE D'ÊTRE ADMIN POUR MODIFIER /!\
+  -DELETE /movie/{id} : permet de supprimer un film à partir de son ID   /!\ IL EST NÉCESSAIRE D'ÊTRE ADMIN POUR MODIFIER /!\
 
-POST /user/login : Authentification via email et mot de passe.
-
-GET /users : Liste l'ensemble des utilisateurs (Acces Admin requis).
-
-PATCH /user/{id} : Modification d'un utilisateur (Acces Admin requis).
-
-DELETE /user/{id} : Suppression d'un utilisateur (Acces Admin requis).
-
-Gestion des Films
-GET /movies : Liste l'ensemble des films (Acces Admin requis).
-
-POST /movie : Creation d'un film (Acces Admin requis).
-
-PATCH /movie/{id} : Modification d'un film (Acces Admin requis).
-
-DELETE /movie/{id} : Suppression d'un film (Acces Admin requis).
-
-Stack Technique
-Framework : Hapi.js
-
-ORM : Schwifty / Knex.js
-
-Base de donnees : MySQL via Docker
-
-Documentation : Hapi-swagger
-
-Souhaites-tu que je detaille les etapes de configuration de Docker pour la base de donnees dans une section annexe ?
+Enfin, pour cloturer la partie utilisateur, nous avons une dernière route : 
+  -GET /movies : permet de lister l'ENSEMBLE des films avec TOUTES leurs informations    /!\ IL EST NÉCESSAIRE D'ÊTRE ADMIN POUR LISTER /!\
